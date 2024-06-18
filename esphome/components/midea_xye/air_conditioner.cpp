@@ -69,6 +69,7 @@ void AirConditioner::setPowerState(bool state) {
   UpdateNextCycle = 1;
 }
 float AirConditioner::CalculateFahrenheitForSend(float temp) {
+  ESP_LOGE(Constants::TAG,"Before Round: %f",temp);
    int roundtemp = std::round(10 * temp);
   ESP_LOGE(Constants::TAG,"Rounded Temp: %i", roundtemp);
    float outtemp = 205.0f;

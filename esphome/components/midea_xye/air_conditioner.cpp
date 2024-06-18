@@ -182,8 +182,9 @@ uint8_t AirConditioner::CalculateCRC(uint8_t* data, uint8_t len)
     return 0xFF - (crc&0xFF);
 }
 float AirConditioner::CalculateCelciusForResp(float temp) {
-  float fahren = (temp-197.0)+62.0;
-  return (fahren-32.0) * (5.0/9.0);
+  float roundtemp = std::round(temp);
+  float fahren = (roundtemp-197.0)+62.0;
+  return std::round((fahren-32.0) * (5.0/9.0));
 }
 void AirConditioner::ParseResponse()
 {

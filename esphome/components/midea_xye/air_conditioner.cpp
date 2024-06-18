@@ -49,7 +49,7 @@ void AirConditioner::setup() {
   this->fan_mode = ClimateFanMode::CLIMATE_FAN_AUTO;
 
   //Set interface to Fahrenheit
-  //setClientCommand(CLIENT_COMMAND_FAHRENHEIT);
+  setClientCommand(CLIENT_COMMAND_FAHRENHEIT);
   this->uart_->write_array(TXData, TX_LEN);
   this->uart_->flush();
   delay(this->response_timeout);

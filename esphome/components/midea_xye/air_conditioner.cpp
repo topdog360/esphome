@@ -69,82 +69,82 @@ void AirConditioner::setPowerState(bool state) {
   UpdateNextCycle = 1;
 }
 float AirConditioner::CalculateFahrenheitForSend(float temp) {
-   float roundtemp = std::round(10 * temp) / 10;
+   int roundtemp = std::round(10 * temp);
    float outtemp = 205.0f;
    switch(roundtemp) {
-     case 16.7f:
+     case 167:
        outtemp = 197.0f;
        break;
-     case 17.2f:
+     case 172:
        outtemp = 198.0f;
        break;
-     case 17.8f:
+     case 178:
        outtemp = 199.0f;
        break;
-     case 18.3f:
+     case 183:
        outtemp = 200.0f;
        break;
-     case 18.9f:
+     case 189:
        outtemp = 201.0f;
        break;
-     case 19.4f:
+     case 194:
        outtemp = 202.0f;
        break;
-     case 20.0f:
+     case 200:
        outtemp = 203.0f;
        break;
-     case 20.6f:
+     case 206:
        outtemp = 204.0f;
        break;
-     case 21.1f:
+     case 211:
        outtemp = 205.0f;
        break;
-     case 21.7f:
+     case 217:
        outtemp = 206.0f;
        break;
-     case 22.2f:
+     case 222:
        outtemp = 207.0f;
        break;
-     case 22.8f:
+     case 228:
        outtemp = 208.0f;
        break;
-     case 23.3f:
+     case 233:
        outtemp = 209.0f;
        break;
-     case 23.9f:
+     case 239:
        outtemp = 210.0f;
        break;
-     case 24.4f:
+     case 244:
        outtemp = 211.0f;
        break;
-     case 25.0f:
+     case 250:
        outtemp = 212.0f;
        break;
-     case 25.6f:
+     case 256:
        outtemp = 213.0f;
        break;
-     case 26.1f:
+     case 261:
        outtemp = 214.0f;
        break;
-     case 26.7f:
+     case 267:
        outtemp = 215.0f;
        break;
-     case 27.2f:
+     case 272:
        outtemp = 216.0f;
        break;
-     case 27.8f:
+     case 278:
        outtemp = 217.0f;
        break;
-     case 28.3f:
+     case 283:
        outtemp = 218.0f;
        break;
-     case 28.9f:
+     case 289:
        outtemp = 219.0f;
        break;
-     case 29.4f:
+     case 294:
        outtemp = 220.0f;
        break;
-     case 30.0f:
+     case 300:
        outtemp = 221.0f;
        break;
    }

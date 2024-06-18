@@ -70,7 +70,9 @@ void AirConditioner::setPowerState(bool state) {
 }
 float AirConditioner::CalculateFahrenheitForSend(float temp) {
   float fahren = ((9.0/5.0) * temp) + 32.0;
-  return std::round(197.0+(fahren-62.0));
+  float toret = 197.0+(fahren-62.0);
+  printf("Setting temp to %f",toret);
+  return toret;
 }
 void AirConditioner::setClientCommand(uint8_t command) {
   TXData[0] =  PREAMBLE;

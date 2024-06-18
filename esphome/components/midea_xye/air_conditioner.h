@@ -173,7 +173,8 @@ public:
   void setup() override;
   void loop() override {}
   void setPowerState(bool state);
-
+  float CalculateFahrenheitForSend(float temp);
+  float CalculateCelciusForResp(float temp);
   /* ############### */
   /* ### ACTIONS ### */
   /* ############### */

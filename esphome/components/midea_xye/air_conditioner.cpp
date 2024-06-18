@@ -70,6 +70,7 @@ void AirConditioner::setPowerState(bool state) {
 }
 float AirConditioner::CalculateFahrenheitForSend(float temp) {
    int roundtemp = std::round(10 * temp);
+  ESP_LOGE(Constants::TAG,"Rounded Temp: %i", roundtemp);
    float outtemp = 205.0f;
    switch(roundtemp) {
      case 167:
@@ -148,6 +149,7 @@ float AirConditioner::CalculateFahrenheitForSend(float temp) {
        outtemp = 221.0f;
        break;
    }
+  ESP_LOGE(Constants::TAG,"Out Temp: %f", outtemp);
   return outtemp;
 }
 void AirConditioner::setClientCommand(uint8_t command) {

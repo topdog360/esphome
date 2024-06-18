@@ -69,11 +69,86 @@ void AirConditioner::setPowerState(bool state) {
   UpdateNextCycle = 1;
 }
 float AirConditioner::CalculateFahrenheitForSend(float temp) {
-  float fahren = ((9.0/5.0) * temp) + 32.0;
-  float toret = 197.0+(fahren-62.0);
-  toret = std::ceil(toret);
-  printf("Setting temp to %f",toret);
-  return toret;
+   float roundtemp = std::round(10 * temp) / 10;
+   float outtemp = 205.0f;
+   switch(roundtemp) {
+     case 16.7f:
+       outtemp = 197.0f;
+       break;
+     case 17.2f:
+       outtemp = 198.0f;
+       break;
+     case 17.8f:
+       outtemp = 199.0f;
+       break;
+     case 18.3f:
+       outtemp = 200.0f;
+       break;
+     case 18.9f:
+       outtemp = 201.0f;
+       break;
+     case 19.4f:
+       outtemp = 202.0f;
+       break;
+     case 20.0f:
+       outtemp = 203.0f;
+       break;
+     case 20.6f:
+       outtemp = 204.0f;
+       break;
+     case 21.1f:
+       outtemp = 205.0f;
+       break;
+     case 21.7f:
+       outtemp = 206.0f;
+       break;
+     case 22.2f:
+       outtemp = 207.0f;
+       break;
+     case 22.8f:
+       outtemp = 208.0f;
+       break;
+     case 23.3f:
+       outtemp = 209.0f;
+       break;
+     case 23.9f:
+       outtemp = 210.0f;
+       break;
+     case 24.4f:
+       outtemp = 211.0f;
+       break;
+     case 25.0f:
+       outtemp = 212.0f;
+       break;
+     case 25.6f:
+       outtemp = 213.0f;
+       break;
+     case 26.1f:
+       outtemp = 214.0f;
+       break;
+     case 26.7f:
+       outtemp = 215.0f;
+       break;
+     case 27.2f:
+       outtemp = 216.0f;
+       break;
+     case 27.8f:
+       outtemp = 217.0f;
+       break;
+     case 28.3f:
+       outtemp = 218.0f;
+       break;
+     case 28.9f:
+       outtemp = 219.0f;
+       break;
+     case 29.4f:
+       outtemp = 220.0f;
+       break;
+     case 30.0f:
+       outtemp = 221.0f;
+       break;
+   }
+  return outtemp;
 }
 void AirConditioner::setClientCommand(uint8_t command) {
   TXData[0] =  PREAMBLE;

@@ -71,6 +71,7 @@ void AirConditioner::setPowerState(bool state) {
 float AirConditioner::CalculateFahrenheitForSend(float temp) {
   float fahren = ((9.0/5.0) * temp) + 32.0;
   float toret = 197.0+(fahren-62.0);
+  toret = std::ceil(toret);
   printf("Setting temp to %f",toret);
   return toret;
 }

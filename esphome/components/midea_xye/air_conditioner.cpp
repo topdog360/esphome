@@ -49,7 +49,7 @@ void AirConditioner::setup() {
   this->fan_mode = ClimateFanMode::CLIMATE_FAN_AUTO;
 
   //Set interface to Fahrenheit
-  setClientCommand(CLIENT_COMMAND_FAHRENHEIT);
+ // setClientCommand(CLIENT_COMMAND_FAHRENHEIT);
   this->uart_->write_array(TXData, TX_LEN);
   this->uart_->flush();
   delay(this->response_timeout);
@@ -68,7 +68,9 @@ void AirConditioner::setPowerState(bool state) {
 
   UpdateNextCycle = 1;
 }
-
+float AirConditioner::CalculateFahrenheitForSend(float temp) {
+  return 197.0+(temp-62.0);
+}
 void AirConditioner::setClientCommand(uint8_t command) {
   TXData[0] =  PREAMBLE;
   TXData[1] =  command;
@@ -122,7 +124,7 @@ void AirConditioner::update() {
         default: TXData[7] =  FAN_MODE_AUTO;     
       }
       //set temp 
-      TXData[8] =  this->target_temperature;
+      TXData[8] =  CalculateFahrenheitForSend(this->target_temperature);
       //set mode flags
       TXData[12] = \
         ( (this->preset == ClimatePreset::CLIMATE_PRESET_BOOST) * MODE_FLAG_AUX_HEAT) \
@@ -177,7 +179,10 @@ uint8_t AirConditioner::CalculateCRC(uint8_t* data, uint8_t len)
     }
     return 0xFF - (crc&0xFF);
 }
-
+float AirConditioner::CalculateCelciusForResp(float temp) {
+  float fahren = (temp-197.0)+62.0;
+  return (fahren-32.0) * (5.0/9.0);
+}
 void AirConditioner::ParseResponse()
 {
   // validate the response
@@ -233,7 +238,7 @@ void AirConditioner::ParseResponse()
     if( mode != ClimateMode::CLIMATE_MODE_OFF || ForceReadNextCycle == 1) //Don't update below states unless mode is an ON state
     {
       
-      update_property(this->target_temperature, (float)RXData[RX_BYTE_SET_TEMP], need_publish);
+      update_property(this->target_temperature, CalculateCelciusForResp((float)RXData[RX_BYTE_SET_TEMP]), need_publish);
       //Don't update fan mode when we set it to auto
       //It seems the heatpump doesn't report back Auto mode - it reports back the current mode
       if(this->fan_mode != fan_mode && this->fan_mode != ClimateFanMode::CLIMATE_FAN_AUTO)

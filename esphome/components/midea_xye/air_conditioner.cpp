@@ -69,6 +69,7 @@ void AirConditioner::setPowerState(bool state) {
   UpdateNextCycle = 1;
 }
 float AirConditioner::CalculateFahrenheitForSend(float temp) {
+  float fahren = ((9.0/5.0) * temp) + 32.0;
   return 197.0+(temp-62.0);
 }
 void AirConditioner::setClientCommand(uint8_t command) {

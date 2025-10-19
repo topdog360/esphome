@@ -121,7 +121,7 @@ validate_custom_fan_modes = cv.enum(CUSTOM_FAN_MODES, upper=True)
 validate_custom_presets = cv.enum(CUSTOM_PRESETS, upper=True)
 
 CONFIG_SCHEMA = cv.All(
-    climate.climate_schema(
+    climate.climate_schema().extend(
         {
             cv.GenerateID(): cv.declare_id(AirConditioner),
             cv.Optional(CONF_PERIOD, default="1s"): cv.time_period,

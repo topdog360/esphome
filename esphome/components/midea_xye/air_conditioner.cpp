@@ -449,7 +449,11 @@ ClimateTraits AirConditioner::traits() {
   traits.set_visual_min_temperature(17);
   traits.set_visual_max_temperature(30);
   traits.set_visual_temperature_step(1.0);
-  traits.set_supported_modes(this->supported_modes_);
+  esphome::climate::ClimateModeMask mode_mask;
+  for (auto mode : your_std_set) {
+    mode_mask.add(this->supported_modes_);
+  }
+  traits.set_supported_modes(mode_mask);
   traits.set_supported_swing_modes(this->supported_swing_modes_);
   traits.set_supported_presets(this->supported_presets_);
   traits.set_supported_custom_presets(this->supported_custom_presets_);

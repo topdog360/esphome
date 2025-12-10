@@ -12,6 +12,7 @@
 #include "ir_transmitter.h"
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/climate/climate_traits.h"
+#include <set>
 
 //CLIENT command structure
 #define PREAMBLE      0XAA

@@ -454,10 +454,30 @@ ClimateTraits AirConditioner::traits() {
     mode_mask.insert(mode);
   }
   traits.set_supported_modes(mode_mask);
-  traits.set_supported_swing_modes(this->supported_swing_modes_);
-  traits.set_supported_presets(this->supported_presets_);
-  traits.set_supported_custom_presets(this->supported_custom_presets_);
-  traits.set_supported_custom_fan_modes(this->supported_custom_fan_modes_);
+  esphome::climate::ClimateSwingModeMask swing_mode_mask;
+  for (auto mode: this->supported_swing_modes_) {
+    swing_mode_mask.insert(mode);
+  }
+  traits.set_supported_swing_modes(swing_mode_mask);
+  esphome::climate::ClimatePresetMask preset_mask;
+  for (auto preset: this->supported_presets_) {
+    preset_mask.insert(preset);
+  }
+  traits.set_supported_presets(preset_mask);
+  std::vector<const char*> presets_list;
+  presets_list.reserve(this->supported_custom_presets_.size());
+
+  for (const auto &preset : this->supported_custom_presets_) {
+    presets_list.push_back(preset.c_str());
+  }
+  traits.set_supported_custom_presets(presets_list);
+  std::vector<const char*> fan_modes_list;
+  fan_modes_list.reserve(this->supported_custom_fan_modes_.size());
+
+  for (const auto &mode : this->supported_custom_fan_modes_) {
+    fan_modes_list.push_back(mode.c_str());
+  }
+  traits.set_supported_custom_fan_modes(fan_modes_list);
   /* + MINIMAL SET OF CAPABILITIES */
   traits.add_supported_fan_mode(ClimateFanMode::CLIMATE_FAN_AUTO);
   traits.add_supported_fan_mode(ClimateFanMode::CLIMATE_FAN_LOW);

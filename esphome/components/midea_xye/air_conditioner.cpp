@@ -445,7 +445,7 @@ float AirConditioner::CalculateTemp(uint8_t byte) {
 
 ClimateTraits AirConditioner::traits() {
   auto traits = ClimateTraits();
-  traits.set_supports_current_temperature(true);
+  traits.add_feature_flags(climate::CLIMATE_FEATURE_CURRENT_TEMPERATURE);
   traits.set_visual_min_temperature(17);
   traits.set_visual_max_temperature(30);
   traits.set_visual_temperature_step(1.0);
